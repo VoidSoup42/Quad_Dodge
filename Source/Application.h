@@ -2,6 +2,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <memory>
+#include "Game.h"
 
 class Application
 {
@@ -12,7 +14,6 @@ public:
     void Run();
 
 private:
-    void Update(float& deltaTime);
-
     GLFWwindow* m_window;
+    std::unique_ptr<Game> m_game;
 };

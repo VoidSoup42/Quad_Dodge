@@ -7,9 +7,15 @@ find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 
 add_executable(Quad_Dodge
-    src/Main.cpp
-    src/Application.h
-    src/Application.cpp
+    Source/Main.cpp
+    Source/Application.h
+    Source/Application.cpp
+    Source/Game.h
+    Source/Game.cpp
+    Source/Quad.h
+    Source/Quad.cpp
+    Source/Shader.h
+    Source/Shader.cpp
 )
 
 target_link_libraries(Quad_Dodge PRIVATE OpenGL::GL GLEW::GLEW glfw)
