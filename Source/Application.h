@@ -19,6 +19,11 @@ public:
         return s_Application;
     }
 
+    static inline GLFWwindow* GetWindow()
+    {
+        return s_Application->m_window;
+    }
+
 private:
     GLFWwindow* m_window;
     std::unique_ptr<Game> m_game;

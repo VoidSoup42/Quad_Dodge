@@ -36,6 +36,13 @@ Quad::Quad()
     glBindVertexArray(0);
 }
 
+Quad::~Quad()
+{
+    glDeleteBuffers(1, &m_vertexBuffer);
+    glDeleteBuffers(1, &m_indexBuffer);
+    glDeleteVertexArrays(1, &m_vertexArray);
+}
+
 void Quad::Draw(Shader& shader)
 {
     shader.Bind();

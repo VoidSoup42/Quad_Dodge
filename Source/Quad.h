@@ -15,7 +15,7 @@ class Quad
 {
 public:
     Quad();
-    ~Quad() = default;
+    ~Quad();
     
     glm::mat4 modelMatrix = glm::mat4(1.0f);
 
@@ -24,7 +24,5 @@ public:
 private:
     uint32_t m_vertexArray, m_vertexBuffer, m_indexBuffer;
     std::vector<Vertex> m_vertices;
-    std::vector<uint32_t> m_indices;
-
-    
+    std::vector<uint32_t> m_indices;  
 };
