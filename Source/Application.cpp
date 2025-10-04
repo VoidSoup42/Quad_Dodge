@@ -1,8 +1,11 @@
 #include "Application.h"
 #include <iostream>
 
+Application *Application::s_Application = nullptr;
+
 Application::Application(uint16_t width, uint16_t height, const char* title, bool vSync, bool fullscreen)
 {
+    s_Application = this;
     if (!glfwInit())
     {
         std::cout << "Failed to initialize glfw" << std::endl;
@@ -32,13 +35,18 @@ Application::Application(uint16_t width, uint16_t height, const char* title, boo
     m_game = std::make_unique<Game>();
 }
 
+Application::~Application()
+{
+    std::cout << "Application Destroyed" << std::endl;
+    s_Application = nullptr;
+}
+
 void Application::Run()
 {
     float lastFrame;
     float deltaTime;
     while (!glfwWindowShouldClose(m_window))
     {
-        glClearColor(0.3, 0.7, 0.8, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
 
         float currentFrame = glfwGetTime();
@@ -49,4 +57,11 @@ void Application::Run()
         glfwPollEvents();
         glfwSwapBuffers(m_window);
     }
+}
+
+glm::vec2 Application::GetFrameBufferSize()
+{
+    int x, y;
+    glfwGetFramebufferSize(m_window, &x, &y);
+    return glm::vec2(x, y);
 }

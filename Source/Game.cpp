@@ -1,47 +1,29 @@
 #include "Game.h"
+#include "Application.h"
 #include <iostream>
 
 Game::Game() : shader("../Resources/simple.vert", "../Resources/simple.frag")
 {
     std::cout << "Game Created" << std::endl;
-
-    // const char* vertexShader = "\n"
-    //     "#version 460 core"
-    //     "layout (location = 0) in vec2 aPos;"
-    //     "layout (location = 1) in vec2 uv;"
-    //     "void main(){"
-    //     "   gl_Position = vec4(aPos, 1.0, 1.0);"
-    //     "}";
-
-    // const char* fragmentShader = "\n"
-    //     "#version 460 core"
-    //     "out vec4 FragColor;"
-    //     "void main(){"
-    //     "   FragColor = vec4(1.0, 0.5, 0.2, 1.0);"
-    //     "}";
-
-    // m_vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    // glShaderSource(m_vertexShader, 1, &vertexShader, 0);
-    // glCompileShader(m_vertexShader);
     
-    // m_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // glShaderSource(m_fragmentShader, 1, &fragmentShader, 0);
-    // glCompileShader(m_fragmentShader);
-
-    // m_program = glCreateProgram();
-
-    // glAttachShader(m_program, m_vertexShader);
-    // glAttachShader(m_program, m_fragmentShader);
-    // glLinkProgram(m_program);
-
-    // glDeleteShader(m_vertexShader);
-    // glDeleteShader(m_fragmentShader);
-
-        
+    app_instance = Application::Get();
+    proj = glm::ortho(-8.0f, 8.0f, -4.5f, 4.5f, -10.0f, 10.0f);
+    view = glm::mat4(1.0f);
 }
 
 void Game::Update(float& deltaTime)
 {
+    glm::vec2 frameBufferSize = app_instance->GetFrameBufferSize();
+    glViewport(0, 0, frameBufferSize.x, frameBufferSize.y);
+    float aspect = frameBufferSize.x / frameBufferSize.y;
+    float orthoHeight = 4.5f;
+    float orthoWidth = orthoHeight * aspect;
+    proj = glm::ortho(-orthoWidth, orthoWidth, -orthoHeight, orthoHeight, -10.0f, 10.0f);
+
+
     shader.Bind();
-    testQuad.Draw(m_program);
+    shader.SetUniformMatrix4fv("view", glm::value_ptr(view));
+    shader.SetUniformMatrix4fv("proj", glm::value_ptr(proj));
+
+    testQuad.Draw(shader);
 }

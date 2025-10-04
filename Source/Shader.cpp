@@ -2,18 +2,20 @@
 
 std::string ReadFile(const char* filename)
 {
-	std::ifstream in(filename, std::ios::binary);
-	if (in)
-	{
-		std::string contents;
-		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
-		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
-		in.close();
-		return(contents);
-	}
-	throw(errno);
+    std::ifstream in(filename, std::ios::binary);
+    if (in)
+    {
+        std::string contents;
+        in.seekg(0, std::ios::end);
+        contents.resize(in.tellg());
+        in.seekg(0, std::ios::beg);
+        in.read(&contents[0], contents.size());
+        in.close();
+        return contents;
+    }
+    std::string msg = std::string("Failed to open file: ") + filename;
+    std::cerr << msg << std::endl;
+    throw std::runtime_error(msg);
 }
 
 Shader::Shader(const char* vertexFile, const char* fragmentFile)
