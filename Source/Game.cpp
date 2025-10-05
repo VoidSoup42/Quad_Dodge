@@ -33,7 +33,7 @@ Game::~Game()
 void Game::Update(float &deltaTime)
 {
     float time = glfwGetTime();
-    glClearColor(0.4, 0.7, 0.9, 1.0f);
+    glClearColor(0.871, 0.243, 0.243, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glm::vec2 frameBufferSize = app_instance->GetFrameBufferSize();
@@ -46,6 +46,7 @@ void Game::Update(float &deltaTime)
     shader.Bind();
     shader.SetUniformMatrix4fv("view", glm::value_ptr(m_view));
     shader.SetUniformMatrix4fv("proj", glm::value_ptr(m_proj));
+    shader.SetUniformVec3("color", glm::vec3(1.0f, 1.0f, 1.0f));
     m_player->Draw(shader);
 
     // Player Controller
@@ -78,6 +79,7 @@ void Game::Update(float &deltaTime)
     for (std::unique_ptr<Quad> &obstacle : m_obstacles)
     {
         obstacle->modelMatrix = glm::translate(obstacle->modelMatrix, glm::vec3(0.0f, -obstacleSpeed * deltaTime, 0.0f));
+        shader.SetUniformVec3("color", glm::vec3(1.0, 1.0, 1.0));
         obstacle->Draw(shader);
     }
 

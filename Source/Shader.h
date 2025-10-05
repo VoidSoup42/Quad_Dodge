@@ -24,6 +24,7 @@ public:
     }
 
     void SetUniformMatrix4fv(const char* name, float* value);
+    void SetUniformVec3(const char* name, glm::vec3 value);
 private:
     unsigned int m_id;
 };
