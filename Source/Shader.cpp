@@ -60,22 +60,7 @@ void Shader::Unbind()
 
 }
 
-void Shader::SetUniformVec4(const char* name, const glm::vec4& value)
-{
-    glUniform4fv(glGetUniformLocation(m_id, name), 1, &value[0]);
-}
-
-void Shader::SetUniformVec3(const char* name, const glm::vec3& value)
-{
-    glUniform3fv(glGetUniformLocation(m_id, name), 1, &value[0]);
-}
-
 void Shader::SetUniformMatrix4fv(const char* name, float* value)
 {
     glUniformMatrix4fv(glGetUniformLocation(m_id, name), 1, GL_FALSE, value);
-}
-
-void Shader::setUniform1i(const char* name, int value)
-{
-    glUniform1i(glGetUniformLocation(m_id, name), value);
 }

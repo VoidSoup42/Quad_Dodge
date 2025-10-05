@@ -33,4 +33,6 @@ private:
 
     std::vector<glm::vec2> m_obstaclePositions;
     std::vector<std::unique_ptr<Quad>> m_obstacles;
+
+    void ResetGame();
 };
