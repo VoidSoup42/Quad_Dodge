@@ -47,8 +47,6 @@ void Application::Run()
     float deltaTime;
     while (!glfwWindowShouldClose(m_window))
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;

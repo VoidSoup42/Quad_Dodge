@@ -32,7 +32,10 @@ Game::~Game()
 
 void Game::Update(float &deltaTime)
 {
-    glClearColor(0.38, 0.91, 0.51, 1.0);
+    float time = glfwGetTime();
+    glClearColor(0.4, 0.7, 0.9, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     glm::vec2 frameBufferSize = app_instance->GetFrameBufferSize();
     glViewport(0, 0, frameBufferSize.x, frameBufferSize.y);
     float aspect = frameBufferSize.x / frameBufferSize.y;
@@ -53,6 +56,9 @@ void Game::Update(float &deltaTime)
     if (directionX != 0.0f)
     {
         m_player->modelMatrix = glm::translate(m_player->modelMatrix, glm::vec3(directionX * moveSpeed * deltaTime, 0.0f, 0.0f));
+
+        if (m_player->modelMatrix[3].x > orthoWidth - 0.5f)     m_player->modelMatrix[3].x = orthoWidth - 0.5f;
+        if (m_player->modelMatrix[3].x < -orthoWidth + 0.5f)    m_player->modelMatrix[3].x = -orthoWidth + 0.5f;
     }
 
     // Obstacle Spawner
