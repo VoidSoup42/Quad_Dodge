@@ -1,7 +1,7 @@
 #include "Application.h"
 #include <iostream>
 
-Application *Application::s_Application = nullptr;
+Application* Application::s_Application = nullptr;
 
 Application::Application(uint16_t width, uint16_t height, const char* title, bool vSync, bool fullscreen)
 {
