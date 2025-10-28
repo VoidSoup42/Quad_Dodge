@@ -2,6 +2,8 @@
 
 Simple 2D game made with OpenGL.
 
+![Screenshot](Screenshots/example.png)
+
 ## Libraries Used
 
 - GLFW (for window and input)  
